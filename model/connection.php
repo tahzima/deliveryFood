@@ -73,7 +73,7 @@ class Connection {
 
 //    --------------------------------------update
 
-   function update($table,$tabName, $tabValue,$id, $idName)
+   function update($table,$tabName,$tabValue,$id, $idName)
    {
       $name="";
       $value="";
@@ -88,7 +88,11 @@ class Connection {
       }
       
       $qry="UPDATE ".$table." SET ".$name." WHERE ".$idName."=".$id;
-      $this->sql->query($qry);
+      // $this->sql->query($qry);
+      if($this->sql->query($qry)){
+         return true;
+      }
+      return false;
    }
 
 //    --------------------------------------select
