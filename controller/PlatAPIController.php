@@ -1,18 +1,18 @@
 <?php
-require_once "model/Restaurant.php";
-class RestaurantAPIController
+require_once "model/Plat.php";
+class PlatAPIController
 {
 
 	function index()
 	{
-		$restaurants=Restaurant::getAll();
+		$plats=Plat::getAll();
 		// On envoie le code réponse 200 OK
         http_response_code(200);
-		foreach($restaurants as $rows)
-		$restaurant[]=$rows;
+		foreach($plats as $rows)
+		$plat[]=$rows;
 
         // On encode en json et on envoie
-        echo json_encode($restaurant);
+        echo json_encode($plat);
 		
 	}
 
@@ -21,15 +21,14 @@ class RestaurantAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$restaurant=new Restaurant();
+    	$plat=new Plat();
 
-		if(!empty($data->nom) && !empty($data->telephone) && !empty($data->adresse) && !empty($data->idAdmin))
+		if(!empty($data->nom) && !empty($data->image) && !empty($data->categorie))
 		{
-			$restaurant->nom=$data->nom;
-			$restaurant->adresse=$data->adresse;
-			$restaurant->telephone=$data->telephone;
-			$restaurant->idAdmin=$data->idAdmin;
-			$value=$restaurant->create();
+			$plat->nom=$data->nom;
+			$plat->image=$data->image;
+			$plat->categorie=$data->categorie;
+			$value=$plat->create();
 			 if($value)
 			{
             // Ici la création a fonctionné
@@ -56,16 +55,15 @@ class RestaurantAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$restaurant=new Restaurant();
+    	$plat=new Plat();
 
-		if((!empty($data->idRestaurant)) && (!empty($data->nom) || !empty($data->telephone) || !empty($data->adresse) || !empty($data->idAdmin)))
+		if((!empty($data->idPlat)) && (!empty($data->nom) || !empty($data->image) || !empty($data->categorie)))
 		{
-			$restaurant->idRestaurant=$data->idRestaurant;
-			$restaurant->nom=$data->nom;
-			$restaurant->adresse=$data->adresse;
-			$restaurant->telephone=$data->telephone;
-			$restaurant->idAdmin=$data->idAdmin;
-			$value=$restaurant->save();
+			$plat->idPlat=$data->idPlat;
+			$plat->nom=$data->nom;
+			$plat->image=$data->image;
+			$plat->categorie=$data->categorie;
+			$value=$plat->save();
 			if($value)
 			{
             // Ici la création a fonctionné
@@ -92,12 +90,12 @@ class RestaurantAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$restaurant=new Restaurant();
+    	$plat=new Plat();
 
-		if(!empty($data->idRestaurant))
+		if(!empty($data->idPlat))
 		{
-			$restaurant->idRestaurant=$data->idRestaurant;
-			$value=$restaurant->delete();
+			$plat->idPlat=$data->idPlat;
+			$value=$plat->delete();
 			 if($value)
 			{
             // Ici la création a fonctionné

@@ -1,18 +1,18 @@
 <?php
-require_once "model/Restaurant.php";
-class RestaurantAPIController
+require_once "model/Preparer.php";
+class PreparerAPIController
 {
 
 	function index()
 	{
-		$restaurants=Restaurant::getAll();
+		$preparers=Preparer::getAll();
 		// On envoie le code réponse 200 OK
         http_response_code(200);
-		foreach($restaurants as $rows)
-		$restaurant[]=$rows;
+		foreach($preparers as $rows)
+		$preparer[]=$rows;
 
         // On encode en json et on envoie
-        echo json_encode($restaurant);
+        echo json_encode($preparer);
 		
 	}
 
@@ -21,15 +21,14 @@ class RestaurantAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$restaurant=new Restaurant();
+    	$preparer=new Preparer();
 
-		if(!empty($data->nom) && !empty($data->telephone) && !empty($data->adresse) && !empty($data->idAdmin))
+		if(!empty($data->prix) && !empty($data->idRestaurant) && !empty($data->idPlat))
 		{
-			$restaurant->nom=$data->nom;
-			$restaurant->adresse=$data->adresse;
-			$restaurant->telephone=$data->telephone;
-			$restaurant->idAdmin=$data->idAdmin;
-			$value=$restaurant->create();
+			$preparer->prix=$data->prix;
+			$preparer->idRestaurant=$data->idRestaurant;
+			$preparer->idPlat=$data->idPlat;
+			$value=$preparer->create();
 			 if($value)
 			{
             // Ici la création a fonctionné
@@ -56,16 +55,15 @@ class RestaurantAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$restaurant=new Restaurant();
+    	$preparer=new Preparer();
 
-		if((!empty($data->idRestaurant)) && (!empty($data->nom) || !empty($data->telephone) || !empty($data->adresse) || !empty($data->idAdmin)))
+		if((!empty($data->idPreparer)) && (!empty($data->prix) || !empty($data->idRestaurant) || !empty($data->idPlat)))
 		{
-			$restaurant->idRestaurant=$data->idRestaurant;
-			$restaurant->nom=$data->nom;
-			$restaurant->adresse=$data->adresse;
-			$restaurant->telephone=$data->telephone;
-			$restaurant->idAdmin=$data->idAdmin;
-			$value=$restaurant->save();
+			$preparer->idPreparer=$data->idPreparer;
+			$preparer->prix=$data->prix;
+			$preparer->idRestaurant=$data->idRestaurant;
+			$preparer->idPlat=$data->idPlat;
+			$value=$preparer->save();
 			if($value)
 			{
             // Ici la création a fonctionné
@@ -92,12 +90,12 @@ class RestaurantAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$restaurant=new Restaurant();
+    	$preparer=new Preparer();
 
-		if(!empty($data->idRestaurant))
+		if(!empty($data->idPreparer))
 		{
-			$restaurant->idRestaurant=$data->idRestaurant;
-			$value=$restaurant->delete();
+			$preparer->idPreparer=$data->idPreparer;
+			$value=$preparer->delete();
 			 if($value)
 			{
             // Ici la création a fonctionné

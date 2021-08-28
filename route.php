@@ -28,7 +28,7 @@ if (isset($_GET['p']) && !empty($_GET['p']))
 		}else if($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
 			
-		    	$obj->add();
+		    $obj->add();
 
 		}else if ($_SERVER['REQUEST_METHOD'] == 'PUT') 
 		{

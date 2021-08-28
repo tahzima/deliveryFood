@@ -5,9 +5,9 @@ class Restaurant
 {
 	public $idRestaurant;
 	public $nom;
-	public $telephone;
 	public $adresse;
-	public $menu;
+	public $telephone;
+	public $idAdmin;
 	static private $table="restaurant";
 
 	function __construct()
@@ -24,13 +24,13 @@ class Restaurant
 	function create()
 	{
 		
-		return $this->db->insert(self::$table,["nom","telephone","adresse","menu"], [$this->nom,$this->telephone,$this->adresse,$this->menu]);
+		return $this->db->insert(self::$table,["nom","adresse","telephone","idAdmin"], [$this->nom,$this->adresse,$this->telephone,$this->idAdmin]);
 	}
 
 	function save()
 	{
 		
-		return $this->db->update(self::$table,["nom","telephone","adresse","menu"], [$this->nom,$this->telephone,$this->adresse,$this->menu] ,$this->idRestaurant,'idRestaurant');
+		return $this->db->update(self::$table,["nom","adresse","telephone","idAdmin"], [$this->nom,$this->adresse,$this->telephone,$this->idAdmin] ,$this->idRestaurant,'idRestaurant');
 	}
 
 	function delete()

@@ -1,18 +1,18 @@
 <?php
-require_once "model/Restaurant.php";
-class RestaurantAPIController
+require_once "model/Livreur.php";
+class LivreurAPIController
 {
 
 	function index()
 	{
-		$restaurants=Restaurant::getAll();
+		$livreurs=Livreur::getAll();
 		// On envoie le code réponse 200 OK
         http_response_code(200);
-		foreach($restaurants as $rows)
-		$restaurant[]=$rows;
+		foreach($livreurs as $rows)
+		$livreur[]=$rows;
 
         // On encode en json et on envoie
-        echo json_encode($restaurant);
+        echo json_encode($livreur);
 		
 	}
 
@@ -21,15 +21,18 @@ class RestaurantAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$restaurant=new Restaurant();
+    	$livreur=new Livreur();
 
-		if(!empty($data->nom) && !empty($data->telephone) && !empty($data->adresse) && !empty($data->idAdmin))
+		if(!empty($data->nom) && !empty($data->prenom) && !empty($data->cin) && !empty($data->telephone) && !empty($data->email) && !empty($data->password) && !empty($data->idAdmin))
 		{
-			$restaurant->nom=$data->nom;
-			$restaurant->adresse=$data->adresse;
-			$restaurant->telephone=$data->telephone;
-			$restaurant->idAdmin=$data->idAdmin;
-			$value=$restaurant->create();
+			$livreur->nom=$data->nom;
+			$livreur->prenom=$data->prenom;
+			$livreur->cin=$data->cin;
+			$livreur->telephone=$data->telephone;
+			$livreur->email=$data->email;
+			$livreur->password=$data->password;
+			$livreur->idAdmin=$data->idAdmin;
+			$value=$livreur->create();
 			 if($value)
 			{
             // Ici la création a fonctionné
@@ -56,17 +59,20 @@ class RestaurantAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$restaurant=new Restaurant();
+    	$livreur=new Livreur();
 
-		if((!empty($data->idRestaurant)) && (!empty($data->nom) || !empty($data->telephone) || !empty($data->adresse) || !empty($data->idAdmin)))
+		if((!empty($data->idLivreur)) && (!empty($data->dateCommande) || !empty($data->confirmation) || !empty($data->idClient) || !empty($data->idLivreur)))
 		{
-			$restaurant->idRestaurant=$data->idRestaurant;
-			$restaurant->nom=$data->nom;
-			$restaurant->adresse=$data->adresse;
-			$restaurant->telephone=$data->telephone;
-			$restaurant->idAdmin=$data->idAdmin;
-			$value=$restaurant->save();
-			if($value)
+			$livreur->idLivreur=$data->idLivreur;
+			$livreur->nom=$data->nom;
+			$livreur->prenom=$data->prenom;
+			$livreur->cin=$data->cin;
+			$livreur->telephone=$data->telephone;
+			$livreur->email=$data->email;
+			$livreur->password=$data->password;
+			$livreur->idAdmin=$data->idAdmin;
+			$value=$livreur->save();
+			 if($value)
 			{
             // Ici la création a fonctionné
             // On envoie un code 201
@@ -92,12 +98,12 @@ class RestaurantAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$restaurant=new Restaurant();
+    	$livreur=new Livreur();
 
-		if(!empty($data->idRestaurant))
+		if(!empty($data->idLivreur))
 		{
-			$restaurant->idRestaurant=$data->idRestaurant;
-			$value=$restaurant->delete();
+			$livreur->idLivreur=$data->idLivreur;
+			$value=$livreur->delete();
 			 if($value)
 			{
             // Ici la création a fonctionné

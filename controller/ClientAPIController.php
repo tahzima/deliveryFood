@@ -1,18 +1,18 @@
 <?php
-require_once "model/Restaurant.php";
-class RestaurantAPIController
+require_once "model/Client.php";
+class ClientAPIController
 {
 
 	function index()
 	{
-		$restaurants=Restaurant::getAll();
+		$clients=Client::getAll();
 		// On envoie le code réponse 200 OK
         http_response_code(200);
-		foreach($restaurants as $rows)
-		$restaurant[]=$rows;
+		foreach($clients as $rows)
+		$client[]=$rows;
 
         // On encode en json et on envoie
-        echo json_encode($restaurant);
+        echo json_encode($client);
 		
 	}
 
@@ -21,15 +21,17 @@ class RestaurantAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$restaurant=new Restaurant();
+    	$clinet=new Client();
 
-		if(!empty($data->nom) && !empty($data->telephone) && !empty($data->adresse) && !empty($data->idAdmin))
+		if(!empty($data->nom) && !empty($data->prenom) && !empty($data->cin) && !empty($data->telephone) && !empty($data->email) && !empty($data->password))
 		{
-			$restaurant->nom=$data->nom;
-			$restaurant->adresse=$data->adresse;
-			$restaurant->telephone=$data->telephone;
-			$restaurant->idAdmin=$data->idAdmin;
-			$value=$restaurant->create();
+			$clinet->nom=$data->nom;
+			$clinet->prenom=$data->prenom;
+			$clinet->cin=$data->cin;
+			$clinet->telephone=$data->telephone;
+			$clinet->email=$data->email;
+			$clinet->password=$data->password;
+			$value=$clinet->create();
 			 if($value)
 			{
             // Ici la création a fonctionné
@@ -56,17 +58,19 @@ class RestaurantAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$restaurant=new Restaurant();
+    	$client=new Client();
 
-		if((!empty($data->idRestaurant)) && (!empty($data->nom) || !empty($data->telephone) || !empty($data->adresse) || !empty($data->idAdmin)))
+		if((!empty($data->idClient)) && (!empty($data->nom) || !empty($data->prenom) || !empty($data->role) || !empty($data->adresse) || !empty($data->telephone) || !empty($data->email) || !empty($data->password)))
 		{
-			$restaurant->idRestaurant=$data->idRestaurant;
-			$restaurant->nom=$data->nom;
-			$restaurant->adresse=$data->adresse;
-			$restaurant->telephone=$data->telephone;
-			$restaurant->idAdmin=$data->idAdmin;
-			$value=$restaurant->save();
-			if($value)
+			$client->idClient=$data->idClient;
+			$client->nom=$data->nom;
+			$client->prenom=$data->prenom;
+			$client->cin=$data->cin;
+			$client->telephone=$data->telephone;
+			$client->email=$data->email;
+			$client->password=$data->password;
+			$value=$client->save();
+			 if($value)
 			{
             // Ici la création a fonctionné
             // On envoie un code 201
@@ -92,12 +96,12 @@ class RestaurantAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$restaurant=new Restaurant();
+    	$client=new Client();
 
-		if(!empty($data->idRestaurant))
+		if(!empty($data->idClient))
 		{
-			$restaurant->idRestaurant=$data->idRestaurant;
-			$value=$restaurant->delete();
+			$client->idClient=$data->idClient;
+			$value=$client->delete();
 			 if($value)
 			{
             // Ici la création a fonctionné

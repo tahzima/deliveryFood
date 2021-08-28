@@ -1,18 +1,18 @@
 <?php
-require_once "model/Users.php";
-class UsersAPIController
+require_once "model/Admin.php";
+class AdminAPIController
 {
 
 	function index()
 	{
-		$users=Users::getAll();
+		$admins=Admin::getAll();
 		// On envoie le code réponse 200 OK
         http_response_code(200);
-		foreach($users as $rows)
-		$user[]=$rows;
+		foreach($admins as $rows)
+		$admin[]=$rows;
 
         // On encode en json et on envoie
-        echo json_encode($user);
+        echo json_encode($admin);
 		
 	}
 
@@ -21,18 +21,17 @@ class UsersAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$user=new Users();
+    	$admin=new Admin();
 
-		if(!empty($data->nom) && !empty($data->prenom) && !empty($data->role) && !empty($data->adresse) && !empty($data->telephone) && !empty($data->email) && !empty($data->password))
+		if(!empty($data->nom) && !empty($data->prenom) && !empty($data->cin) && !empty($data->telephone) && !empty($data->email) && !empty($data->password))
 		{
-			$user->nom=$data->nom;
-			$user->prenom=$data->prenom;
-			$user->role=$data->role;
-			$user->adresse=$data->adresse;
-			$user->telephone=$data->telephone;
-			$user->email=$data->email;
-			$user->password=$data->password;
-			$value=$user->create();
+			$admin->nom=$data->nom;
+			$admin->prenom=$data->prenom;
+			$admin->cin=$data->cin;
+			$admin->telephone=$data->telephone;
+			$admin->email=$data->email;
+			$admin->password=$data->password;
+			$value=$admin->create();
 			 if($value)
 			{
             // Ici la création a fonctionné
@@ -59,19 +58,18 @@ class UsersAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$user=new Users();
+    	$admin=new Admin();
 
-		if((!empty($data->idUser)) && (!empty($data->nom) || !empty($data->prenom) || !empty($data->role) || !empty($data->adresse) || !empty($data->telephone) || !empty($data->email) || !empty($data->password)))
+		if((!empty($data->idAdmin)) && (!empty($data->nom) || !empty($data->prenom) || !empty($data->role) || !empty($data->adresse) || !empty($data->telephone) || !empty($data->email) || !empty($data->password)))
 		{
-			$user->idUser=$data->idUser;
-			$user->nom=$data->nom;
-			$user->prenom=$data->prenom;
-			$user->role=$data->role;
-			$user->adresse=$data->adresse;
-			$user->telephone=$data->telephone;
-			$user->email=$data->email;
-			$user->password=$data->password;
-			$value=$user->save();
+			$admin->idAdmin=$data->idAdmin;
+			$admin->nom=$data->nom;
+			$admin->prenom=$data->prenom;
+			$admin->cin=$data->cin;
+			$admin->telephone=$data->telephone;
+			$admin->email=$data->email;
+			$admin->password=$data->password;
+			$value=$admin->save();
 			 if($value)
 			{
             // Ici la création a fonctionné
@@ -98,12 +96,12 @@ class UsersAPIController
 		// On récupère les informations envoyées
     	$data = json_decode(file_get_contents("php://input"));
 
-    	$user=new Users();
+    	$admin=new Admin();
 
-		if(!empty($data->idUser))
+		if(!empty($data->idAdmin))
 		{
-			$user->idUser=$data->idUser;
-			$value=$user->delete();
+			$admin->idAdmin=$data->idAdmin;
+			$value=$admin->delete();
 			 if($value)
 			{
             // Ici la création a fonctionné
