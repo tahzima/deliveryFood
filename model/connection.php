@@ -103,10 +103,12 @@ class Connection {
    //    return $this->sql->query($qry)->fetchAll()[0];
    // }
 
-   function selectById($table,$id)
+   function selectByEmailPassWord($table,$email,$password)
    {
-      $qry="select * from ".$table." where id=".$id;
-      return $this->sql->query($qry)->fetchAll()[0];
+      $qry="SELECT * FROM ".$table." WHERE email='".$email."' and password='".$password."'";
+
+      // return $this->sql->query($qry)->fetchAll()[0];
+      return $this->sql->query($qry)->fetchAll(PDO::FETCH_ASSOC);
    }
 }
 

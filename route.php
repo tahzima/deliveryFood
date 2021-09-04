@@ -25,6 +25,7 @@ if (isset($_GET['p']) && !empty($_GET['p']))
 
 			$obj->index();
 
+
 		}else if($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
 			

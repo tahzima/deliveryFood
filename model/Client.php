@@ -41,4 +41,8 @@ class Client
 		return $this->db->delete(self::$table,'idClient', $this->idClient);
 	}
 
+	function connectUsers(){
+		return $this->db->selectByEmailPassWord(self::$table,$this->email,$this->password);
+	}
+	
 }

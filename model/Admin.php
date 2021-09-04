@@ -41,4 +41,7 @@ class Admin
 		return $this->db->delete(self::$table,'idAdmin', $this->idAdmin);
 	}
 
+	function connectUsers(){
+		return $this->db->selectByEmailPassWord(self::$table,$this->email,$this->password);
+	}
 }

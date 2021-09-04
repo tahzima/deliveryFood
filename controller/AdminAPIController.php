@@ -122,4 +122,41 @@ class AdminAPIController
 		    echo json_encode(["message" => "La méthode n'est pas autorisée"]);
 		}
 	}
+	// function connect()
+	// {
+	// 	// On récupère les informations envoyées
+    // 	$data = json_decode(file_get_contents("php://input"));
+
+    // 	$admin=new Admin();
+
+	// 	if(!empty($data->email) && !empty($data->password))
+	// 	{
+	// 		$admin->email=$data->email;
+	// 		$admin->password=$data->password;
+
+	// 		$values=$admin->auth();
+	// 		// foreach($values as $rows)
+	// 		// 	$admins[]=$rows;
+			
+	// 		echo json_encode($values);
+	// 		// if($value)
+	// 		// {
+    //         // // Ici la création a fonctionné
+    //         // // On envoie un code 201
+    //         // http_response_code(201);
+    //         // echo json_encode(["message" => $value]);
+	//         // }else
+	//         // {
+	//         //     // Ici la création n'a pas fonctionné
+	//         //     // On envoie un code 503
+	//         //     http_response_code(503);
+	//         //     echo json_encode(["message" => $value]);         
+	//         // }
+	// 	}else
+	// 	{
+	// 		// On gère l'erreur
+	// 	    http_response_code(405);
+	// 	    echo json_encode(["message" => "La méthode n'est pas autorisée"]);
+	// 	}
+	// }
 }

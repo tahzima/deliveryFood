@@ -42,4 +42,8 @@ class Livreur
 		return $this->db->delete(self::$table,'idLivreur', $this->idLivreur);
 	}
 
+	function connectUsers(){
+		return $this->db->selectByEmailPassWord(self::$table,$this->email,$this->password);
+	}
+	
 }
